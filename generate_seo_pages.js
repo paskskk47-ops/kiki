@@ -1450,32 +1450,32 @@ function getCityTemplate(cityName, citySlug, stateName, pageType) {
 
   if (pageType === 'call-girls') {
     keywordPlural = 'Call Girls';
-    pageTitle = `${cityName} Call Girls — Verified Independent Escorts | kiki.com`;
-    pageH1 = `${cityName} Call Girls`;
-    pageIntro = `Verified call girls, companion agencies, and VIP escorts in ${cityName}, ${stateName}. Call or WhatsApp directly to book.`;
-    seoHeading = `Independent Escorts and Call Girls in ${cityName}`;
-    seoPara = `Find premium adult companion services, high-class call girls, and independent agency profiles based in ${cityName}, ${stateName || 'India'}. Discover verified escorts offering top-tier services, social dates, and private travel arrangements.`;
+    pageTitle = `${cityName} Call Girls — Low Cost Cash Payment Escorts | kiki.com`;
+    pageH1 = `Call Girl in ${cityName}`;
+    pageIntro = `Welcome to the premier directory for verified call girls in ${cityName}. Connect directly with independent companions, high-class college girls, and models offering discreet cash payment services.`;
+    seoHeading = `Premium Call Girl in ${cityName} — Verified & Safe Companion Services`;
+    seoPara = `Looking for top-rated, luxurious call girls in ${cityName}? kiki.com is the #1 adult classified directory designed to assist you in finding the perfect partner in a completely safe, anonymous, and comfortable environment. Choose from a rich selection of premium local escorts, independent models, college call girls, Russian call girls, and gorgeous mature housewives who know how to turn your desires into reality.<br><br>Whether you are looking for a relaxing hotel in-call encounter or an outcall dinner date companion in ${cityName}, our profiles are verified with real photos, direct phone numbers, and instant WhatsApp booking options. Enjoy top-tier companionship at affordable, low-cost rates, ranging from standard quick shot pricing to full-night companion packages with convenient cash-on-delivery options.`;
   } else if (pageType === 'escorts') {
     keywordPlural = 'Escorts';
     pageTitle = `${cityName} Escorts — High Class Independent Companions | kiki.com`;
-    pageH1 = `${cityName} Escorts`;
-    pageIntro = `Premium independent escorts, high-class companions, and VIP escort agencies in ${cityName}, ${stateName}. Find verified profiles here.`;
-    seoHeading = `High Class Escorts and Companions in ${cityName}`;
-    seoPara = `Discover high-class escorts, elite agency models, and exclusive independent companions in ${cityName}, ${stateName || 'India'}. Enjoy premium adult dates, social events companionship, and private travel hosting.`;
+    pageH1 = `Escort Service in ${cityName}`;
+    pageIntro = `Discover premium independent escorts, high-class companions, and elite agency models in ${cityName}. Browse verified listings for dinner dates, travel hosting, and social events.`;
+    seoHeading = `High-Class Escort Services in ${cityName} — Elite VIP Companionship`;
+    seoPara = `Experience elite adult companionship with the most exclusive escorts in ${cityName}. Our directory hosts verified profiles of independent VIP escorts, international companions, and local agency models who are ready to accompany you to private events, corporate dinners, or travel getaways across ${stateName}.<br><br>We offer 24/7 client matching to connect you with mature companions, specialized models, and high-class companions. Every listing features verified details to guarantee privacy and high-quality encounters, allowing you to book direct calls or chat on WhatsApp to establish your custom bookings in a discreet manner.`;
   } else if (pageType === 'massage') {
     keywordPlural = 'Massage';
     pageTitle = `${cityName} Erotic Massage — Sensual Body-to-Body Spa | kiki.com`;
-    pageH1 = `${cityName} Erotic Massage`;
-    pageIntro = `Discreet erotic massage parlors, sensual body-to-body massage providers, and independent masseuses in ${cityName}, ${stateName}.`;
-    seoHeading = `Sensual Spa and Erotic Massage in ${cityName}`;
-    seoPara = `Relax with top-tier erotic massage services, sensual spa treatments, and body-to-body massages in ${cityName}, ${stateName || 'India'}. Connect with independent masseuses offering private outcall services.`;
+    pageH1 = `Erotic Massage in ${cityName}`;
+    pageIntro = `Relax with top-tier erotic massage services, sensual body-to-body treatments, and independent masseuses in ${cityName}. Professional stress relief in private luxury hotel rooms.`;
+    seoHeading = `Sensual Spa and Erotic Body-to-Body Massage in ${cityName}`;
+    seoPara = `Indulge in pure relaxation and stress relief with premium erotic massage services in ${cityName}. Discover skilled independent masseuses and professional therapists offering sensual body-to-body massages, tantric therapies, and relaxing spa sessions inside private residences or premium hotel rooms.<br><br>Connecting with a local masseuse in ${cityName} is simple and completely anonymous. Browse through our listings, check verified reviews and rates, and coordinate directly via WhatsApp or direct call to book your relaxing session. Discover wellness and sensual touch today.`;
   } else if (pageType === 'male-escorts') {
     keywordPlural = 'Male Escorts';
     pageTitle = `${cityName} Male Escorts — Verified Gigolos & Playboys | kiki.com`;
-    pageH1 = `${cityName} Male Escorts`;
-    pageIntro = `Verified male escorts, professional gigolos, playboy companions, and male massage providers in ${cityName}, ${stateName}.`;
-    seoHeading = `Male Escorts and Gigolos in ${cityName}`;
-    seoPara = `Find professional male escorts, certified gigolos, and handsome playboy massage therapists in ${cityName}, ${stateName || 'India'}. Discreet bookings for female clients, couples, and premium events.`;
+    pageH1 = `Male Escorts in ${cityName}`;
+    pageIntro = `Book professional male escorts, certified gigolos, and playboy companions in ${cityName}. Highly discreet adult services for female clients, couples, and social events.`;
+    seoHeading = `Attentive Male Escorts and Gigolos in ${cityName}`;
+    seoPara = `Connect with handsome, athletic, and attentive male escorts in ${cityName} for private encounters, romantic dates, or professional companionship. Our classified platform features verified gigolos, playboy massage therapists, and gentlemen hosts who cater specifically to female clients and couples looking for a memorable, high-class experience.<br><br>All bookings are kept 100% confidential and discreet. Reach out to verified male escorts in ${cityName} via WhatsApp or direct phone calls to arrange details, rates, and duration at your absolute convenience.`;
   }
 
   return `<!DOCTYPE html>
