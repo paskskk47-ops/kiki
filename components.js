@@ -296,31 +296,45 @@ function renderProfileCard(profile, options = {}) {
   const tierLabel = tierLabels[profile.tier] || '';
   const stars = profile.avgRating ? '★'.repeat(Math.round(profile.avgRating)) + '<span style="opacity:0.3">' + '★'.repeat(5 - Math.round(profile.avgRating)) + '</span>' : '';
 
+  // Safe phone fallback and formatting
+  const phone = profile.phone || '+919999999999';
+  const cleanPhone = phone.replace(/[^0-9+]/g, '');
+
   return `
-  <a href="profile.html?id=${profile.id}" class="profile-card tier-card-${profile.tier} ${blurred ? 'card-blurred' : ''}">
-    <div class="card-image-wrap">
-      <img src="${profile.primaryPhoto}" alt="${profile.name}" class="card-image" loading="lazy">
-      ${blurred ? `<div class="card-blur-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Members Only</span></div>` : ''}
-      <div class="card-top-badges">
-        ${profile.hasVideo ? `<span class="card-badge card-badge-video"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Video</span>` : ''}
-        ${profile.isNew ? `<span class="card-badge card-badge-new">✦ New</span>` : ''}
+  <div class="profile-card tier-card-${profile.tier} ${blurred ? 'card-blurred' : ''}">
+    <a href="profile.html?id=${profile.id}" class="profile-card-link" style="text-decoration:none; color:inherit; display:flex; flex-direction:column; flex:1;">
+      <div class="card-image-wrap">
+        <img src="${profile.primaryPhoto}" alt="${profile.name}" class="card-image" loading="lazy">
+        ${blurred ? `<div class="card-blur-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Members Only</span></div>` : ''}
+        <div class="card-top-badges">
+          ${profile.hasVideo ? `<span class="card-badge card-badge-video"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Video</span>` : ''}
+          ${profile.isNew ? `<span class="card-badge card-badge-new">✦ New</span>` : ''}
+        </div>
+        <div class="card-bottom-badges">
+          ${profile.tier !== 'free' ? `<span class="card-badge card-tier-badge tier-${profile.tier}">${tierLabel}</span>` : ''}
+        </div>
+        <div class="card-status-row">
+          ${profile.isOnline ? `<span class="online-dot-badge"><span class="online-pulse"></span> Online</span>` : ''}
+          ${profile.isVerified ? `<span class="verified-dot-badge"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Verified</span>` : ''}
+        </div>
       </div>
-      <div class="card-bottom-badges">
-        ${profile.tier !== 'free' ? `<span class="card-badge card-tier-badge tier-${profile.tier}">${tierLabel}</span>` : ''}
+      <div class="card-body">
+        <div class="card-name">${profile.name} <span class="card-age">${profile.age}</span></div>
+        ${showCity ? `<div class="card-location">📍 ${profile.city}</div>` : ''}
+        <p class="card-desc">${profile.shortDesc}</p>
+        ${profile.reviewCount > 0 ? `<div class="card-stars">${stars} <span class="card-review-count">(${profile.reviewCount})</span></div>` : ''}
+        <div class="card-rate">${profile.incallRate}</div>
       </div>
-      <div class="card-status-row">
-        ${profile.isOnline ? `<span class="online-dot-badge"><span class="online-pulse"></span> Online</span>` : ''}
-        ${profile.isVerified ? `<span class="verified-dot-badge"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Verified</span>` : ''}
-      </div>
+    </a>
+    <div class="card-actions-wrapper">
+      <a href="https://wa.me/${cleanPhone.replace('+', '')}?text=Hi%20${profile.name},%20I%20saw%20your%20profile%20on%20kiki.com" target="_blank" class="btn-card-action btn-card-whatsapp">
+        💬 WhatsApp
+      </a>
+      <a href="tel:${cleanPhone}" class="btn-card-action btn-card-call">
+        📞 Call Now
+      </a>
     </div>
-    <div class="card-body">
-      <div class="card-name">${profile.name} <span class="card-age">${profile.age}</span></div>
-      ${showCity ? `<div class="card-location">📍 ${profile.city}</div>` : ''}
-      <p class="card-desc">${profile.shortDesc}</p>
-      ${profile.reviewCount > 0 ? `<div class="card-stars">${stars} <span class="card-review-count">(${profile.reviewCount})</span></div>` : ''}
-      <div class="card-rate">${profile.incallRate}</div>
-    </div>
-  </a>
+  </div>
   `;
 }
 

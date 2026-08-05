@@ -513,6 +513,46 @@ input, textarea { font-family: inherit; outline: none; }
 .card-review-count { color: var(--text-dim); font-size: 0.75rem; }
 .card-rate { font-size: 0.82rem; font-weight: 700; color: var(--red); margin-top: 4px; }
 
+.card-actions-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 8px 12px 12px;
+  background: var(--bg-3);
+  border-top: 1px solid var(--border);
+  z-index: 5;
+}
+.btn-card-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 0;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: var(--transition);
+  cursor: pointer;
+  border: none;
+}
+.btn-card-whatsapp {
+  background: #25D366;
+  color: #fff;
+}
+.btn-card-whatsapp:hover {
+  background: #20bd5c;
+  transform: translateY(-1px);
+}
+.btn-card-call {
+  background: #007bff;
+  color: #fff;
+}
+.btn-card-call:hover {
+  background: #0069d9;
+  transform: translateY(-1px);
+}
+
 /* ============================================================
    CTA BANNERS
    ============================================================ */
