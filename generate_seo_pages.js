@@ -1303,10 +1303,11 @@ lines.forEach(line => {
     };
     states.push(currentState);
   } else if (currentState) {
+    const cleanCityName = line.replace(/\s+Call\s+Girls$/i, '').trim();
     currentState.cities.push({
       fullName: line,
-      cleanName: line.replace(/\s+Call\s+Girls$/i, '').trim(),
-      slug: slugify(line)
+      cleanName: cleanCityName,
+      slug: slugify(cleanCityName)
     });
   }
 });
@@ -1439,14 +1440,51 @@ function getStateTemplate(stateName, stateSlug) {
 }
 
 // Template for City HTML page
-function getCityTemplate(cityName, citySlug, stateName, rawFullName) {
+function getCityTemplate(cityName, citySlug, stateName, pageType) {
+  let pageTitle = '';
+  let pageH1 = '';
+  let pageIntro = '';
+  let seoHeading = '';
+  let seoPara = '';
+  let keywordPlural = '';
+
+  if (pageType === 'call-girls') {
+    keywordPlural = 'Call Girls';
+    pageTitle = `${cityName} Call Girls — Verified Independent Escorts | kiki.com`;
+    pageH1 = `${cityName} Call Girls`;
+    pageIntro = `Verified call girls, companion agencies, and VIP escorts in ${cityName}, ${stateName}. Call or WhatsApp directly to book.`;
+    seoHeading = `Independent Escorts and Call Girls in ${cityName}`;
+    seoPara = `Find premium adult companion services, high-class call girls, and independent agency profiles based in ${cityName}, ${stateName || 'India'}. Discover verified escorts offering top-tier services, social dates, and private travel arrangements.`;
+  } else if (pageType === 'escorts') {
+    keywordPlural = 'Escorts';
+    pageTitle = `${cityName} Escorts — High Class Independent Companions | kiki.com`;
+    pageH1 = `${cityName} Escorts`;
+    pageIntro = `Premium independent escorts, high-class companions, and VIP escort agencies in ${cityName}, ${stateName}. Find verified profiles here.`;
+    seoHeading = `High Class Escorts and Companions in ${cityName}`;
+    seoPara = `Discover high-class escorts, elite agency models, and exclusive independent companions in ${cityName}, ${stateName || 'India'}. Enjoy premium adult dates, social events companionship, and private travel hosting.`;
+  } else if (pageType === 'massage') {
+    keywordPlural = 'Massage';
+    pageTitle = `${cityName} Erotic Massage — Sensual Body-to-Body Spa | kiki.com`;
+    pageH1 = `${cityName} Erotic Massage`;
+    pageIntro = `Discreet erotic massage parlors, sensual body-to-body massage providers, and independent masseuses in ${cityName}, ${stateName}.`;
+    seoHeading = `Sensual Spa and Erotic Massage in ${cityName}`;
+    seoPara = `Relax with top-tier erotic massage services, sensual spa treatments, and body-to-body massages in ${cityName}, ${stateName || 'India'}. Connect with independent masseuses offering private outcall services.`;
+  } else if (pageType === 'male-escorts') {
+    keywordPlural = 'Male Escorts';
+    pageTitle = `${cityName} Male Escorts — Verified Gigolos & Playboys | kiki.com`;
+    pageH1 = `${cityName} Male Escorts`;
+    pageIntro = `Verified male escorts, professional gigolos, playboy companions, and male massage providers in ${cityName}, ${stateName}.`;
+    seoHeading = `Male Escorts and Gigolos in ${cityName}`;
+    seoPara = `Find professional male escorts, certified gigolos, and handsome playboy massage therapists in ${cityName}, ${stateName || 'India'}. Discreet bookings for female clients, couples, and premium events.`;
+  }
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${rawFullName} — Premium Escort Directory | kiki.com</title>
-  <meta name="description" content="Find the best ${rawFullName} on kiki.com. Verified profiles, photos, and direct WhatsApp or call numbers. Discreet and reliable.">
+  <title>${pageTitle}</title>
+  <meta name="description" content="${pageIntro}">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
@@ -1471,8 +1509,8 @@ function getCityTemplate(cityName, citySlug, stateName, rawFullName) {
   <div class="city-hero">
     <div class="city-hero-inner">
       <div id="breadcrumb-mount" class="mb-24"></div>
-      <h1 id="city-name-title">${rawFullName}</h1>
-      <p id="city-intro">Verified call girls and independent escorts in ${cityName}, ${stateName}. Find your perfect companion today.</p>
+      <h1 id="city-name-title">${pageH1}</h1>
+      <p id="city-intro">${pageIntro}</p>
       <div class="city-cat-tabs">
         <button class="city-tab active" onclick="filterCat(null,this)">All</button>
         <button class="city-tab" onclick="filterCat('female',this)">Escort Girls</button>
@@ -1506,20 +1544,34 @@ function getCityTemplate(cityName, citySlug, stateName, rawFullName) {
       initHeader(); initAgeGate(); initCookieBanner();
 
       const citySlug = '${citySlug}';
+      const pageType = '${pageType}';
+      
       let city = typeof getCityBySlug === 'function' ? getCityBySlug(citySlug) : null;
       if (!city) {
         city = { name: '${cityName}', slug: citySlug, state: '${stateName}', region: 'India', flag: '🇮🇳', count: 42 };
       }
 
-      document.title = city.name + ' Call Girls — Verified Independent Escorts | kiki.com';
-      document.getElementById('city-name-title').textContent = (city.flag || '🇮🇳') + ' ' + city.name + ' Call Girls';
-      document.getElementById('city-intro').textContent = 'Discover verified ' + city.name + ' call girls, companion agencies, and VIP escorts. Call or WhatsApp directly to book.';
+      let keywordPlural = 'Call Girls';
+      if (pageType === 'escorts') keywordPlural = 'Escorts';
+      else if (pageType === 'massage') keywordPlural = 'Massage';
+      else if (pageType === 'male-escorts') keywordPlural = 'Male Escorts';
+
+      document.title = city.name + ' ' + keywordPlural + ' — Verified Independent Companions | kiki.com';
+      document.getElementById('city-name-title').textContent = (city.flag || '🇮🇳') + ' ' + city.name + ' ' + keywordPlural;
+      
+      let introText = 'Discover verified ' + city.name + ' ' + keywordPlural.toLowerCase() + ', companion agencies, and VIP escorts. Call or WhatsApp directly to book.';
+      if (pageType === 'massage') {
+        introText = 'Relax with premium sensual spa treatments, body-to-body erotic massage, and independent masseuses in ' + city.name + '.';
+      } else if (pageType === 'male-escorts') {
+        introText = 'Book professional male escorts, certified gigolos, and playboy companions based in ' + city.name + '.';
+      }
+      document.getElementById('city-intro').textContent = introText;
 
       document.getElementById('breadcrumb-mount').innerHTML = renderBreadcrumb([
         { label: 'Home', href: 'index.html' },
         { label: 'Locations', href: 'locations.html' },
         { label: city.state, href: slugify(city.state) + '.html' },
-        { label: city.name + ' Call Girls', href: '#' }
+        { label: city.name + ' ' + keywordPlural, href: '#' }
       ]);
 
       const districts = ['City Centre', 'Downtown', 'Old Town', 'Gated Community', 'Suburbs', 'West End', 'Metro Area'];
@@ -1533,7 +1585,7 @@ function getCityTemplate(cityName, citySlug, stateName, rawFullName) {
           profiles = PROFILES.filter(p => !activeCat || p.gender === activeCat).slice(0, 12);
         }
         document.getElementById('city-grid').innerHTML = profiles.map(p => renderProfileCard(p, {showCity:false})).join('');
-        document.getElementById('city-count').innerHTML = '<strong>' + city.count + '</strong> call girls available in ' + city.name;
+        document.getElementById('city-count').innerHTML = '<strong>' + city.count + '</strong> listings available in ' + city.name;
       }
 
       window.filterCat = (cat, el) => {
@@ -1548,11 +1600,12 @@ function getCityTemplate(cityName, citySlug, stateName, rawFullName) {
       if (city.state && typeof getCitiesByState === 'function') {
         peerCities = getCitiesByState(city.state).filter(c => c.slug !== citySlug).slice(0, 12);
       }
-      document.getElementById('city-seo').innerHTML = '<h2>Independent Escorts and Call Girls in ' + city.name + '</h2>' +
-        '<p>Find premium adult companion services, high-class call girls, and independent agency profiles based in ' + city.name + ', ' + (city.state || 'India') + '. Discover verified escorts offering top-tier services, social dates, and private travel arrangements.</p>' +
+      
+      document.getElementById('city-seo').innerHTML = '<h2>' + `${seoHeading}` + '</h2>' +
+        '<p>' + `${seoPara}` + '</p>' +
         '<h3>Browse More Locations in ' + city.state + '</h3>' +
         '<div class="seo-city-links">' +
-          peerCities.map(c => '<a href="' + c.slug + '-call-girls.html">' + c.name + ' Call Girls</a>').join('') +
+          peerCities.map(c => '<a href="' + c.slug + '-' + pageType + '.html">' + c.name + ' ' + keywordPlural + '</a>').join('') +
           '<a href="' + slugify(city.state) + '.html" style="font-weight:700;color:var(--red)">View All ' + city.state + ' →</a>' +
         '</div>';
 
@@ -1577,15 +1630,37 @@ states.forEach(state => {
     console.error('Error writing state file: ' + statePath, e);
   }
 
-  // Generate each city file
+  // Generate each city file (4 pages for every city location!)
   state.cities.forEach(city => {
-    const cityPath = path.join(__dirname, city.slug + '.html');
+    // 1. Call Girls page
+    const callGirlsPath = path.join(__dirname, city.slug + '-call-girls.html');
+    // 2. Escorts page
+    const escortsPath = path.join(__dirname, city.slug + '-escorts.html');
+    // 3. Massage page
+    const massagePath = path.join(__dirname, city.slug + '-massage.html');
+    // 4. Male Escorts page
+    const maleEscortsPath = path.join(__dirname, city.slug + '-male-escorts.html');
+    
+    // Write Call Girls
     try {
-      fs.writeFileSync(cityPath, getCityTemplate(city.cleanName, slugify(city.cleanName), state.name, city.fullName), 'utf8');
-    } catch(e) {
-      console.error('Error writing city file: ' + cityPath, e);
-    }
+      fs.writeFileSync(callGirlsPath, getCityTemplate(city.cleanName, city.slug, state.name, 'call-girls'), 'utf8');
+    } catch(e) { console.error('Error writing call girls page: ', e); }
+
+    // Write Escorts
+    try {
+      fs.writeFileSync(escortsPath, getCityTemplate(city.cleanName, city.slug, state.name, 'escorts'), 'utf8');
+    } catch(e) { console.error('Error writing escorts page: ', e); }
+
+    // Write Massage
+    try {
+      fs.writeFileSync(massagePath, getCityTemplate(city.cleanName, city.slug, state.name, 'massage'), 'utf8');
+    } catch(e) { console.error('Error writing massage page: ', e); }
+
+    // Write Male Escorts
+    try {
+      fs.writeFileSync(maleEscortsPath, getCityTemplate(city.cleanName, city.slug, state.name, 'male-escorts'), 'utf8');
+    } catch(e) { console.error('Error writing male escorts page: ', e); }
   });
 });
 
-console.log('Successfully generated all SEO locations files!');
+console.log('Successfully generated all SEO locations files (4 pages per location)!');
