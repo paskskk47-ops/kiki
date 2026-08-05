@@ -44,26 +44,33 @@ for filename in images:
 
         height, width, channels = img.shape
 
-        # Create a black mask of the same size as the image
-        mask = np.zeros((height, width), dtype=np.uint8)
+        # Convert to grayscale
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-        # Draw a white rectangle on the mask covering the watermark region (bottom of the image)
-        # Bounding box coordinates: [y_start, y_end, x_start, x_end]
-        y_start = height - watermark_height_px
-        y_end = height
-        x_start = 0
-        x_end = width
+        # Use Morphological Top-Hat (White-Hat) to isolate thin bright elements (like text strokes)
+        # Kernel size 15x15 targets strokes narrower than 15 pixels
+        kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (15, 15))
+        tophat = cv2.morphologyEx(gray, cv2.MORPH_TOPHAT, kernel)
 
-        # Set the watermark region to white (255) on the mask
-        mask[y_start:y_end, x_start:x_end] = 255
+        # Threshold to get a binary mask of the thin text strokes
+        _, mask = cv2.threshold(tophat, 35, 255, cv2.THRESH_BINARY)
 
-        # Perform Telea Inpainting to seamlessly fill the masked area using surrounding pixels
-        inpainted_img = cv2.inpaint(img, mask, inpaintRadius=7, flags=cv2.INPAINT_TELEA)
+        # Clean up noise: only target bright white/light-gray areas
+        # Watermark text callgirl4u.com is very bright (gray value > 150)
+        _, bright_mask = cv2.threshold(gray, 130, 255, cv2.THRESH_BINARY)
+        mask = cv2.bitwise_and(mask, bright_mask)
 
-        # Save the processed image overwriting the original file
+        # Dilate the mask slightly (by 2 pixels) to ensure edges of letters are fully covered
+        dilate_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
+        mask = cv2.dilate(mask, dilate_kernel, iterations=1)
+
+        # Perform Telea Inpainting to fill in the text strokes using surrounding pixel textures
+        inpainted_img = cv2.inpaint(img, mask, inpaintRadius=5, flags=cv2.INPAINT_TELEA)
+
+        # Save the processed image back
         cv2.imwrite(file_path, inpainted_img)
         success_count += 1
-        print(f"[✓] Watermark removed from: {filename}")
+        print(f"[✓] Smart watermark removed from: {filename}")
 
     except Exception as e:
         print(f"[✗] Failed to process {filename}: {e}")
