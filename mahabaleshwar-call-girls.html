@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mahabaleshwar Call Girls — Premium Escort Directory | kiki.com</title>
-  <meta name="description" content="Find the best Mahabaleshwar Call Girls on kiki.com. Verified profiles, photos, and direct WhatsApp or call numbers. Discreet and reliable.">
+  <title>Mahabaleshwar Call Girls — Verified Independent Escorts | kiki.com</title>
+  <meta name="description" content="Verified call girls, companion agencies, and VIP escorts in Mahabaleshwar, Maharashtra Locations. Call or WhatsApp directly to book.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
@@ -30,7 +30,7 @@
     <div class="city-hero-inner">
       <div id="breadcrumb-mount" class="mb-24"></div>
       <h1 id="city-name-title">Mahabaleshwar Call Girls</h1>
-      <p id="city-intro">Verified call girls and independent escorts in Mahabaleshwar, Maharashtra Locations. Find your perfect companion today.</p>
+      <p id="city-intro">Verified call girls, companion agencies, and VIP escorts in Mahabaleshwar, Maharashtra Locations. Call or WhatsApp directly to book.</p>
       <div class="city-cat-tabs">
         <button class="city-tab active" onclick="filterCat(null,this)">All</button>
         <button class="city-tab" onclick="filterCat('female',this)">Escort Girls</button>
@@ -64,20 +64,34 @@
       initHeader(); initAgeGate(); initCookieBanner();
 
       const citySlug = 'mahabaleshwar';
+      const pageType = 'call-girls';
+      
       let city = typeof getCityBySlug === 'function' ? getCityBySlug(citySlug) : null;
       if (!city) {
         city = { name: 'Mahabaleshwar', slug: citySlug, state: 'Maharashtra Locations', region: 'India', flag: '🇮🇳', count: 42 };
       }
 
-      document.title = city.name + ' Call Girls — Verified Independent Escorts | kiki.com';
-      document.getElementById('city-name-title').textContent = (city.flag || '🇮🇳') + ' ' + city.name + ' Call Girls';
-      document.getElementById('city-intro').textContent = 'Discover verified ' + city.name + ' call girls, companion agencies, and VIP escorts. Call or WhatsApp directly to book.';
+      let keywordPlural = 'Call Girls';
+      if (pageType === 'escorts') keywordPlural = 'Escorts';
+      else if (pageType === 'massage') keywordPlural = 'Massage';
+      else if (pageType === 'male-escorts') keywordPlural = 'Male Escorts';
+
+      document.title = city.name + ' ' + keywordPlural + ' — Verified Independent Companions | kiki.com';
+      document.getElementById('city-name-title').textContent = (city.flag || '🇮🇳') + ' ' + city.name + ' ' + keywordPlural;
+      
+      let introText = 'Discover verified ' + city.name + ' ' + keywordPlural.toLowerCase() + ', companion agencies, and VIP escorts. Call or WhatsApp directly to book.';
+      if (pageType === 'massage') {
+        introText = 'Relax with premium sensual spa treatments, body-to-body erotic massage, and independent masseuses in ' + city.name + '.';
+      } else if (pageType === 'male-escorts') {
+        introText = 'Book professional male escorts, certified gigolos, and playboy companions based in ' + city.name + '.';
+      }
+      document.getElementById('city-intro').textContent = introText;
 
       document.getElementById('breadcrumb-mount').innerHTML = renderBreadcrumb([
         { label: 'Home', href: 'index.html' },
         { label: 'Locations', href: 'locations.html' },
         { label: city.state, href: slugify(city.state) + '.html' },
-        { label: city.name + ' Call Girls', href: '#' }
+        { label: city.name + ' ' + keywordPlural, href: '#' }
       ]);
 
       const districts = ['City Centre', 'Downtown', 'Old Town', 'Gated Community', 'Suburbs', 'West End', 'Metro Area'];
@@ -91,7 +105,7 @@
           profiles = PROFILES.filter(p => !activeCat || p.gender === activeCat).slice(0, 12);
         }
         document.getElementById('city-grid').innerHTML = profiles.map(p => renderProfileCard(p, {showCity:false})).join('');
-        document.getElementById('city-count').innerHTML = '<strong>' + city.count + '</strong> call girls available in ' + city.name;
+        document.getElementById('city-count').innerHTML = '<strong>' + city.count + '</strong> listings available in ' + city.name;
       }
 
       window.filterCat = (cat, el) => {
@@ -106,11 +120,12 @@
       if (city.state && typeof getCitiesByState === 'function') {
         peerCities = getCitiesByState(city.state).filter(c => c.slug !== citySlug).slice(0, 12);
       }
-      document.getElementById('city-seo').innerHTML = '<h2>Independent Escorts and Call Girls in ' + city.name + '</h2>' +
-        '<p>Find premium adult companion services, high-class call girls, and independent agency profiles based in ' + city.name + ', ' + (city.state || 'India') + '. Discover verified escorts offering top-tier services, social dates, and private travel arrangements.</p>' +
+      
+      document.getElementById('city-seo').innerHTML = '<h2>' + 'Independent Escorts and Call Girls in Mahabaleshwar' + '</h2>' +
+        '<p>' + 'Find premium adult companion services, high-class call girls, and independent agency profiles based in Mahabaleshwar, Maharashtra Locations. Discover verified escorts offering top-tier services, social dates, and private travel arrangements.' + '</p>' +
         '<h3>Browse More Locations in ' + city.state + '</h3>' +
         '<div class="seo-city-links">' +
-          peerCities.map(c => '<a href="' + c.slug + '-call-girls.html">' + c.name + ' Call Girls</a>').join('') +
+          peerCities.map(c => '<a href="' + c.slug + '-' + pageType + '.html">' + c.name + ' ' + keywordPlural + '</a>').join('') +
           '<a href="' + slugify(city.state) + '.html" style="font-weight:700;color:var(--red)">View All ' + city.state + ' →</a>' +
         '</div>';
 

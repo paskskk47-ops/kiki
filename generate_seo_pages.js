@@ -1601,8 +1601,8 @@ function getCityTemplate(cityName, citySlug, stateName, pageType) {
         peerCities = getCitiesByState(city.state).filter(c => c.slug !== citySlug).slice(0, 12);
       }
       
-      document.getElementById('city-seo').innerHTML = '<h2>' + `${seoHeading}` + '</h2>' +
-        '<p>' + `${seoPara}` + '</p>' +
+      document.getElementById('city-seo').innerHTML = '<h2>' + '${seoHeading.replace(/'/g, "\\'")}' + '</h2>' +
+        '<p>' + '${seoPara.replace(/'/g, "\\'")}' + '</p>' +
         '<h3>Browse More Locations in ' + city.state + '</h3>' +
         '<div class="seo-city-links">' +
           peerCities.map(c => '<a href="' + c.slug + '-' + pageType + '.html">' + c.name + ' ' + keywordPlural + '</a>').join('') +
