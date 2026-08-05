@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>India Escort Directory — Browse Indian States & Cities | kiki.com</title>
+  <meta name="description" content="Browse escort listings in India — all Indian states, union territories and major cities. Find verified companions in your city on kiki.com.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23e63946' d='M12 21.593c-5.63-5.539-11-10.297-11-14.402C1 3.604 4.068 2 6.219 2c1.666 0 3.077.837 4.185 2.093C11.404 2.837 12.815 2 14.481 2 17.072 2 19 4.104 19 7.191c0 4.105-5.37 8.863-11 14.402z'/></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="locations.css">
+</head>
+<body>
+  <div id="header-mount"></div>
+
+  <!-- Hero -->
+  <div class="loc-hero">
+    <div class="loc-hero-bg"></div>
+    <div class="loc-hero-content">
+      <div class="loc-hero-badge">🇮🇳 India Directory</div>
+      <h1 class="loc-hero-title">Find Escorts in <span class="hero-gradient-text">India</span></h1>
+      <p class="loc-hero-sub">Browse verified escorts across all states, union territories and cities in India. Select your state or city to begin.</p>
+
+      <!-- Global live search -->
+      <div class="loc-search-wrap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="loc-search-input" class="loc-search-input" placeholder="Search any city in India…" autocomplete="off">
+        <div class="loc-search-results" id="loc-search-results"></div>
+      </div>
+
+      <!-- Quick stats -->
+      <div class="loc-stats">
+        <div class="loc-stat"><span class="loc-stat-n" id="stat-total-cities">—</span><span class="loc-stat-l">Cities</span></div>
+        <div class="loc-stat-div"></div>
+        <div class="loc-stat"><span class="loc-stat-n">28</span><span class="loc-stat-l">States</span></div>
+        <div class="loc-stat-div"></div>
+        <div class="loc-stat"><span class="loc-stat-n">8</span><span class="loc-stat-l">UTs</span></div>
+        <div class="loc-stat-div"></div>
+        <div class="loc-stat"><span class="loc-stat-n">2,000+</span><span class="loc-stat-l">Listings</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Region Tabs -->
+  <div class="loc-tabs-bar">
+    <div class="loc-tabs-inner">
+      <button class="loc-tab active" data-region="India" onclick="switchRegion('India',this)">🇮🇳 India</button>
+    </div>
+  </div>
+
+  <!-- Content area -->
+  <main class="loc-main">
+
+    <!-- Region intro bar -->
+    <div class="loc-region-bar" id="loc-region-bar"></div>
+
+    <!-- States/Countries/Provinces column layout -->
+    <div class="loc-content" id="loc-content"></div>
+
+  </main>
+
+  <!-- Featured Cities Section -->
+  <section class="featured-cities-section">
+    <div class="featured-cities-inner">
+      <h2 class="section-heading">🔥 Most Popular Cities in India</h2>
+      <div class="featured-cities-grid" id="featured-cities-grid"></div>
+    </div>
+  </section>
+
+  <div id="footer-mount"></div>
+
+  <script src="data.js"></script>
+  <script src="locations.js"></script>
+  <script src="components.js"></script>
+  <script src="locations.js.init.js"></script>
+</body>
+</html>

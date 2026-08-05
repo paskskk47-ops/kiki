@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — kiki.com</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .auth-page {
+      min-height: 100vh;
+      display: flex;
+      background: var(--bg);
+    }
+    .auth-left {
+      flex: 1;
+      background:
+        radial-gradient(ellipse at 30% 50%, rgba(230,57,70,0.2) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 20%, rgba(125,211,252,0.1) 0%, transparent 40%),
+        var(--bg-2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .auth-left::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .auth-left-content { position: relative; z-index: 1; text-align: center; }
+    .auth-brand { font-size: 2rem; font-weight: 900; color: var(--red); margin-bottom: 16px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .auth-tagline { font-size: 1.1rem; color: var(--text-muted); line-height: 1.6; max-width: 340px; margin: 0 auto 40px; }
+    .auth-testimonial {
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px; max-width: 380px;
+    }
+    .auth-testimonial p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px; font-style: italic; }
+    .auth-testimonial-author { font-size: 0.8rem; font-weight: 600; color: var(--gold); }
+    .auth-stats { display: flex; gap: 24px; justify-content: center; margin-top: 40px; }
+    .auth-stat { text-align: center; }
+    .auth-stat-n { font-size: 1.5rem; font-weight: 800; color: var(--text); }
+    .auth-stat-l { font-size: 0.72rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .auth-right {
+      width: 480px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 40px;
+      border-left: 1px solid var(--border);
+      overflow-y: auto;
+    }
+    .auth-form-wrap { width: 100%; max-width: 380px; }
+    .auth-form-title { font-size: 1.6rem; font-weight: 800; margin-bottom: 6px; }
+    .auth-form-sub { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 32px; }
+    .auth-tabs { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 28px; }
+    .auth-tab { padding: 10px 20px; font-size: 0.9rem; font-weight: 600; color: var(--text-muted); cursor: pointer; border-bottom: 2px solid transparent; transition: var(--transition); }
+    .auth-tab.active { color: var(--red); border-bottom-color: var(--red); }
+    .oauth-buttons { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+    .oauth-btn {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 12px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); font-size: 0.9rem; font-weight: 600;
+      color: var(--text); cursor: pointer; transition: var(--transition); background: var(--bg-3);
+    }
+    .oauth-btn:hover { border-color: var(--border-hov); }
+    .auth-divider { text-align: center; color: var(--text-dim); font-size: 0.8rem; margin: 16px 0; position: relative; }
+    .auth-divider::before, .auth-divider::after { content: ''; position: absolute; top: 50%; width: calc(50% - 20px); height: 1px; background: var(--border); }
+    .auth-divider::before { left: 0; }
+    .auth-divider::after { right: 0; }
+    .forgot-link { font-size: 0.82rem; color: var(--text-muted); text-align: right; display: block; margin-top: -12px; margin-bottom: 20px; }
+    .forgot-link:hover { color: var(--red); }
+    .auth-switch { text-align: center; font-size: 0.875rem; color: var(--text-muted); margin-top: 20px; }
+    .auth-switch a { color: var(--red); font-weight: 600; }
+    .role-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+    .role-card {
+      border: 2px solid var(--border); border-radius: var(--radius);
+      padding: 16px; cursor: pointer; transition: var(--transition); text-align: center;
+    }
+    .role-card.selected { border-color: var(--red); background: rgba(230,57,70,0.08); }
+    .role-card-icon { font-size: 1.8rem; margin-bottom: 8px; }
+    .role-card-title { font-size: 0.9rem; font-weight: 700; }
+    .role-card-desc { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }
+    .reg-section { display: none; }
+    .reg-section.active { display: block; }
+    @media(max-width:900px){ .auth-left{display:none;} .auth-right{width:100%;border:none;} }
+  </style>
+</head>
+<body>
+  <div class="auth-page">
+    <!-- Left panel -->
+    <div class="auth-left">
+      <div class="auth-left-content">
+        <div class="auth-brand">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402C1 3.604 4.068 2 6.219 2c1.666 0 3.077.837 4.185 2.093C11.404 2.837 12.815 2 14.481 2 17.072 2 19 4.104 19 7.191c0 4.105-5.37 8.863-11 14.402z"/></svg>
+          kiki.com
+        </div>
+        <p class="auth-tagline">Join India's most exclusive escort directory. Connect with thousands of discerning clients every day.</p>
+        <div class="auth-testimonial">
+          <p>"Since upgrading to Diamond, I've tripled my inquiries. kiki.com is simply the best platform available."</p>
+          <div class="auth-testimonial-author">💎 Diamond Member · Mumbai</div>
+        </div>
+        <div class="auth-stats">
+          <div class="auth-stat"><div class="auth-stat-n">2,000+</div><div class="auth-stat-l">Listings</div></div>
+          <div class="auth-stat"><div class="auth-stat-n">20+</div><div class="auth-stat-l">Cities</div></div>
+          <div class="auth-stat"><div class="auth-stat-n">50K+</div><div class="auth-stat-l">Monthly visitors</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Form -->
+    <div class="auth-right">
+      <div class="auth-form-wrap">
+        <a href="index.html" class="site-logo" style="margin-bottom:32px;display:flex;justify-content:center">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402C1 3.604 4.068 2 6.219 2c1.666 0 3.077.837 4.185 2.093C11.404 2.837 12.815 2 14.481 2 17.072 2 19 4.104 19 7.191c0 4.105-5.37 8.863-11 14.402z"/></svg>
+          kiki.com
+        </a>
+
+        <div class="auth-tabs">
+          <div class="auth-tab active" id="tab-login" onclick="switchTab('login')">Sign In</div>
+          <div class="auth-tab" id="tab-register" onclick="switchTab('register')">Create Account</div>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <div id="section-login" class="reg-section active">
+          <div class="oauth-buttons">
+            <button class="oauth-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Continue with Google
+            </button>
+            <button class="oauth-btn">
+              <svg width="18" height="18" viewBox="0 0 814 1000" fill="currentColor"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-57.8-155.5-127.4C46 790.9 0 699.4 0 609.1c0-159 103.1-245.7 204.1-245.7 52.3 0 96.8 35.1 130 35.1 31.5 0 80.5-37.8 142.8-37.8 23.4 0 108.2 1.9 170.5 78.1zm-220.8-109.5c29.4-38.3 50.4-91 50.4-143.5 0-8.3-.6-16.6-2.6-23.4-47.4 1.9-104.4 32.7-138.5 75.6-28.1 33.9-53.7 86.7-53.7 140.1 0 9 1.3 17.9 1.9 20.7 3.2.6 8.3 1.3 13.4 1.3 42.8 0 92.9-29.4 129.1-70.8z"/></svg>
+              Continue with Apple
+            </button>
+          </div>
+          <div class="auth-divider">or sign in with email</div>
+          <form onsubmit="handleLogin(event)">
+            <div class="form-group">
+              <label class="form-label">Email address</label>
+              <input type="email" class="form-input" id="login-email" placeholder="you@example.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-input" id="login-password" placeholder="••••••••" required>
+            </div>
+            <a href="#" class="forgot-link">Forgot your password?</a>
+            <button type="submit" class="btn-primary">Sign In →</button>
+          </form>
+          <div class="auth-switch">Don't have an account? <a href="#" onclick="switchTab('register')">Create one free</a></div>
+        </div>
+
+        <!-- REGISTER FORM -->
+        <div id="section-register" class="reg-section">
+          <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:16px">I want to register as:</p>
+          <div class="role-selector">
+            <div class="role-card selected" id="role-member" onclick="selectRole('member')">
+              <div class="role-card-icon">👤</div>
+              <div class="role-card-title">Member</div>
+              <div class="role-card-desc">Browse &amp; favorite profiles, leave reviews</div>
+            </div>
+            <div class="role-card" id="role-advertiser" onclick="selectRole('advertiser')">
+              <div class="role-card-icon">📢</div>
+              <div class="role-card-title">Advertiser</div>
+              <div class="role-card-desc">Post listings &amp; grow your clientele</div>
+            </div>
+          </div>
+          <form onsubmit="handleRegister(event)">
+            <div class="form-group">
+              <label class="form-label">Display Name</label>
+              <input type="text" class="form-input" placeholder="Your name or alias" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email address</label>
+              <input type="email" class="form-input" placeholder="you@example.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-input" placeholder="Min. 8 characters" required minlength="8">
+            </div>
+            <div class="form-group" style="display:flex;align-items:flex-start;gap:10px;margin-bottom:20px">
+              <input type="checkbox" id="terms-agree" style="margin-top:3px;accent-color:var(--red)" required>
+              <label for="terms-agree" style="font-size:0.82rem;color:var(--text-muted);line-height:1.5;cursor:pointer">
+                I confirm I am 18+ years old and I agree to the <a href="terms.html" style="color:var(--red)">Terms of Service</a> and <a href="privacy.html" style="color:var(--red)">Privacy Policy</a>.
+              </label>
+            </div>
+            <button type="submit" class="btn-primary">Create Account →</button>
+          </form>
+          <div class="auth-switch">Already have an account? <a href="#" onclick="switchTab('login')">Sign in</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="components.js"></script>
+  <script>
+    function switchTab(tab) {
+      document.getElementById('section-login').classList.toggle('active', tab === 'login');
+      document.getElementById('section-register').classList.toggle('active', tab === 'register');
+      document.getElementById('tab-login').classList.toggle('active', tab === 'login');
+      document.getElementById('tab-register').classList.toggle('active', tab === 'register');
+    }
+    function selectRole(role) {
+      document.getElementById('role-member').classList.toggle('selected', role === 'member');
+      document.getElementById('role-advertiser').classList.toggle('selected', role === 'advertiser');
+    }
+    function handleLogin(e) {
+      e.preventDefault();
+      localStorage.setItem('kiki_user', JSON.stringify({ email: document.getElementById('login-email').value, role: 'member' }));
+      window.location.href = 'dashboard.html';
+    }
+    function handleRegister(e) {
+      e.preventDefault();
+      localStorage.setItem('kiki_user', JSON.stringify({ role: 'member' }));
+      window.location.href = 'dashboard.html';
+    }
+    initAgeGate();
+    initCookieBanner();
+  </script>
+</body>
+</html>

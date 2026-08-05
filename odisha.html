@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escorts in Odisha — Verified Call Girls Directory | kiki.com</title>
+  <meta name="description" content="Discover premium independent escorts and verified call girls across Odisha. Direct contact numbers and reviews on kiki.com.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23e63946' d='M12 21.593c-5.63-5.539-11-10.297-11-14.402C1 3.604 4.068 2 6.219 2c1.666 0 3.077.837 4.185 2.093C11.404 2.837 12.815 2 14.481 2 17.072 2 19 4.104 19 7.191c0 4.105-5.37 8.863-11 14.402z'/></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="locations.css">
+  <style>
+    .state-hero { position: relative; padding: calc(var(--header-h) + 50px) 24px 50px; background: var(--bg-2); border-bottom: 1px solid var(--border); text-align: center; }
+    .state-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: var(--radius-pill); background: rgba(230, 57, 70, 0.1); border: 1px solid rgba(230, 57, 70, 0.3); color: var(--red); font-size: 0.85rem; font-weight: 700; margin-bottom: 14px; }
+    .state-title-h1 { font-size: clamp(2.2rem, 4.5vw, 3.2rem); font-weight: 900; line-height: 1.15; margin-bottom: 16px; }
+    .state-sub { color: var(--text-muted); font-size: 1.05rem; max-width: 720px; margin: 0 auto 30px; line-height: 1.6; }
+    .state-cities-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-top: 24px; }
+    .state-city-item { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-radius: var(--radius-sm); background: var(--bg-2); border: 1px solid var(--border); text-decoration: none; transition: var(--transition); }
+    .state-city-item:hover { background: var(--bg-3); border-color: var(--red); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(230, 57, 70, 0.15); }
+    .state-city-left { font-weight: 700; color: var(--text); font-size: 1rem; }
+    .state-city-right { font-size: 0.8rem; font-weight: 700; color: var(--red); background: rgba(230, 57, 70, 0.1); padding: 4px 10px; border-radius: var(--radius-pill); }
+    .state-filter-box { max-width: 480px; margin: 0 auto 30px; position: relative; }
+    .state-filter-input { width: 100%; padding: 14px 20px 14px 44px; border-radius: var(--radius-pill); background: var(--bg-3); border: 1px solid var(--border); color: var(--text); font-size: 0.95rem; }
+    .state-filter-input:focus { outline: none; border-color: var(--red); }
+    .state-filter-box svg { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-dim); }
+  </style>
+</head>
+<body>
+  <div id="header-mount"></div>
+  <div class="state-hero">
+    <div class="state-badge">🇮🇳 India Directory</div>
+    <h1 class="state-title-h1">Escorts in <span class="hero-gradient-text">Odisha</span></h1>
+    <p class="state-sub">Browse verified independent escorts, call girls, and agency companions in Odisha.</p>
+    <div class="state-filter-box">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="state-search-input" class="state-filter-input" placeholder="Filter cities in Odisha…" autocomplete="off">
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-6 mt-6" id="breadcrumb-mount"></div>
+  <main class="max-w-7xl mx-auto px-6 py-8">
+    <div class="flex items-center justify-between border-b border-border pb-4 mb-6">
+      <h2 class="text-2xl font-black">Available Locations</h2>
+      <span class="text-sm text-text-muted" id="state-city-counter">—</span>
+    </div>
+    <div class="state-cities-grid" id="state-cities-grid"></div>
+    <div class="mt-16 pt-12 border-t border-border">
+      <h2 class="text-2xl font-black mb-6">🔥 Featured Escorts in Odisha</h2>
+      <div class="profiles-grid" id="state-profiles-grid"></div>
+    </div>
+    <div class="seo-block mt-16">
+      <div class="seo-block-inner" id="state-seo-block"></div>
+    </div>
+  </main>
+  <div id="footer-mount"></div>
+
+  <script src="data.js"></script>
+  <script src="locations.js"></script>
+  <script src="components.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('header-mount').innerHTML = renderHeader();
+      document.getElementById('footer-mount').innerHTML = renderFooter();
+      initHeader(); initAgeGate(); initCookieBanner();
+
+      const stateParam = 'odisha';
+      let stateInfo = typeof getStateInfo === 'function' ? getStateInfo(stateParam) : null;
+      if (!stateInfo) {
+        stateInfo = {
+          name: 'Odisha',
+          slug: stateParam,
+          region: 'India',
+          flag: '🇮🇳',
+          cities: [
+            { name: 'Odisha Central', slug: stateParam + '-central', count: 34 }
+          ],
+          totalCount: 34
+        };
+      }
+
+      document.getElementById('state-city-counter').textContent = stateInfo.cities.length + ' Cities';
+
+      // Breadcrumb
+      document.getElementById('breadcrumb-mount').innerHTML = renderBreadcrumb([
+        { label: 'Home', href: 'index.html' },
+        { label: 'Locations', href: 'locations.html' },
+        { label: stateInfo.name, href: '#' }
+      ]);
+
+      function renderCities(citiesList) {
+        const grid = document.getElementById('state-cities-grid');
+        grid.innerHTML = citiesList.map(c => {
+          const citySeoSlug = c.slug + '-call-girls';
+          return '<a href="' + citySeoSlug + '.html" class="state-city-item">' +
+            '<span class="state-city-left">' + c.name + '</span>' +
+            '<span class="state-city-right">' + c.count + ' listings →</span>' +
+            '</a>';
+        }).join('');
+      }
+      renderCities(stateInfo.cities);
+
+      const filterInput = document.getElementById('state-search-input');
+      if (filterInput) {
+        filterInput.addEventListener('input', (e) => {
+          const q = e.target.value.trim().toLowerCase();
+          const filtered = stateInfo.cities.filter(c => c.name.toLowerCase().includes(q));
+          renderCities(filtered);
+        });
+      }
+
+      const profilesGrid = document.getElementById('state-profiles-grid');
+      if (profilesGrid && typeof PROFILES !== 'undefined') {
+        const sample = PROFILES.slice(0, 8);
+        profilesGrid.innerHTML = sample.map(p => renderProfileCard(p, { showCity: true })).join('');
+      }
+
+      document.getElementById('state-seo-block').innerHTML = '<h2>Verified Escorts and Call Girls in ' + stateInfo.name + '</h2>' +
+        '<p>Welcome to the premium index of escorts and call girls in ' + stateInfo.name + '. Browse local companion directories and verify photos before booking.</p>';
+    });
+  </script>
+</body>
+</html>

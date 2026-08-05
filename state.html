@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="state-title">Escort Directory by State — kiki.com</title>
+  <meta name="description" id="state-desc" content="Browse verified escort listings across every city. Real reviews, direct contact, and private companions on kiki.com.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23e63946' d='M12 21.593c-5.63-5.539-11-10.297-11-14.402C1 3.604 4.068 2 6.219 2c1.666 0 3.077.837 4.185 2.093C11.404 2.837 12.815 2 14.481 2 17.072 2 19 4.104 19 7.191c0 4.105-5.37 8.863-11 14.402z'/></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="locations.css">
+  <style>
+    .state-hero {
+      position: relative;
+      padding: calc(var(--header-h) + 50px) 24px 50px;
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+    .state-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: rgba(230, 57, 70, 0.1);
+      border: 1px solid rgba(230, 57, 70, 0.3);
+      color: var(--red);
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .state-title-h1 {
+      font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .state-sub {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 720px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+    }
+    .state-cities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .state-city-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .state-city-item:hover {
+      background: var(--bg-3);
+      border-color: var(--red);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(230, 57, 70, 0.15);
+    }
+    .state-city-left {
+      font-weight: 700;
+      color: var(--text);
+      font-size: 1rem;
+    }
+    .state-city-right {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--red);
+      background: rgba(230, 57, 70, 0.1);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+    }
+    .state-filter-box {
+      max-width: 480px;
+      margin: 0 auto 30px;
+      position: relative;
+    }
+    .state-filter-input {
+      width: 100%;
+      padding: 14px 20px 14px 44px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+    .state-filter-input:focus {
+      outline: none;
+      border-color: var(--red);
+    }
+    .state-filter-box svg {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+    }
+  </style>
+</head>
+<body>
+  <div id="header-mount"></div>
+
+  <!-- Hero Banner -->
+  <div class="state-hero">
+    <div class="state-badge" id="state-hero-badge">📍 State Directory</div>
+    <h1 class="state-title-h1" id="state-hero-title">Escort Listings in State</h1>
+    <p class="state-sub" id="state-hero-sub">Explore verified independent escorts, call girls, and companions across every major city and county.</p>
+
+    <!-- Local Filter Box -->
+    <div class="state-filter-box">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="state-search-input" class="state-filter-input" placeholder="Filter cities in this area…" autocomplete="off">
+    </div>
+  </div>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-7xl mx-auto px-6 mt-6" id="breadcrumb-mount"></div>
+
+  <!-- Main Content Area -->
+  <main class="max-w-7xl mx-auto px-6 py-8">
+    <div class="flex items-center justify-between border-b border-border pb-4 mb-6">
+      <h2 class="text-2xl font-black" id="state-grid-header">Available Cities</h2>
+      <span class="text-sm text-text-muted" id="state-city-counter">—</span>
+    </div>
+
+    <!-- City Grid -->
+    <div class="state-cities-grid" id="state-cities-grid"></div>
+
+    <!-- Featured Profiles Section -->
+    <div class="mt-16 pt-12 border-t border-border">
+      <h2 class="text-2xl font-black mb-6" id="state-profiles-header">🔥 Featured Escorts in This Region</h2>
+      <div class="profiles-grid" id="state-profiles-grid"></div>
+    </div>
+
+    <!-- SEO Content Block -->
+    <div class="seo-block mt-16">
+      <div class="seo-block-inner" id="state-seo-block"></div>
+    </div>
+  </main>
+
+  <div id="footer-mount"></div>
+
+  <script src="data.js"></script>
+  <script src="locations.js"></script>
+  <script src="components.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('header-mount').innerHTML = renderHeader();
+      document.getElementById('footer-mount').innerHTML = renderFooter();
+      initHeader(); initAgeGate(); initCookieBanner();
+
+      const params = new URLSearchParams(window.location.search);
+      const stateParam = params.get('state') || 'maharashtra';
+      
+      let stateInfo = typeof getStateInfo === 'function' ? getStateInfo(stateParam) : null;
+      if (!stateInfo) {
+        // Fallback or synthetic state if custom entered
+        const formattedName = stateParam.charAt(0).toUpperCase() + stateParam.slice(1);
+        const fallbackCities = typeof searchCities === 'function' ? searchCities(stateParam) : [];
+        stateInfo = {
+          name: formattedName,
+          slug: stateParam,
+          region: 'India',
+          flag: '🇮🇳',
+          cities: fallbackCities.length ? fallbackCities : [
+            { name: formattedName + ' Central', slug: stateParam + '-central', count: 34 },
+            { name: formattedName + ' Metro', slug: stateParam + '-metro', count: 52 },
+            { name: 'North ' + formattedName, slug: 'north-' + stateParam, count: 21 }
+          ],
+          totalCount: 107
+        };
+      }
+
+      // Populate Head & Hero
+      document.title = `Escorts in ${stateInfo.name} (${stateInfo.flag}) — ${stateInfo.cities.length} Cities | kiki.com`;
+      document.getElementById('state-desc').content = `Find verified independent escorts across all ${stateInfo.cities.length} major cities in ${stateInfo.name}. Browse reviews and direct contact details on kiki.com.`;
+
+      document.getElementById('state-hero-badge').innerHTML = `${stateInfo.flag} ${stateInfo.region} Directory`;
+      document.getElementById('state-hero-title').innerHTML = `Escorts in <span class="hero-gradient-text">${stateInfo.name}</span>`;
+      document.getElementById('state-hero-sub').textContent = `Explore ${stateInfo.totalCount}+ verified escort listings across ${stateInfo.cities.length} major cities and surrounding municipalities in ${stateInfo.name}.`;
+
+      // Breadcrumb
+      document.getElementById('breadcrumb-mount').innerHTML = renderBreadcrumb([
+        { label: 'Home', href: 'index.html' },
+        { label: 'Locations', href: 'locations.html' },
+        { label: stateInfo.region, href: `locations.html?region=${stateInfo.region}` },
+        { label: stateInfo.name, href: '#' }
+      ]);
+
+      // Render Cities Grid
+      function renderCities(citiesList) {
+        const grid = document.getElementById('state-cities-grid');
+        document.getElementById('state-city-counter').textContent = `${citiesList.length} Cities in ${stateInfo.name}`;
+        if (!citiesList.length) {
+          grid.innerHTML = `<div style="grid-column: 1 / -1; padding: 40px; text-align: center; color: var(--text-muted);">No cities found matching your filter inside ${stateInfo.name}.</div>`;
+          return;
+        }
+        grid.innerHTML = citiesList.map(c => `
+          <a href="city.html?city=${c.slug}" class="state-city-item">
+            <span class="state-city-left">${c.name}</span>
+            <span class="state-city-right">${c.count} listings →</span>
+          </a>
+        `).join('');
+      }
+
+      renderCities(stateInfo.cities);
+
+      // Local city search filter inside state page
+      const filterInput = document.getElementById('state-search-input');
+      if (filterInput) {
+        filterInput.addEventListener('input', (e) => {
+          const q = e.target.value.trim().toLowerCase();
+          if (!q) {
+            renderCities(stateInfo.cities);
+          } else {
+            const filtered = stateInfo.cities.filter(c => c.name.toLowerCase().includes(q));
+            renderCities(filtered);
+          }
+        });
+      }
+
+      // Render Sample / Featured Profiles
+      const profilesGrid = document.getElementById('state-profiles-grid');
+      if (profilesGrid && typeof PROFILES !== 'undefined') {
+        const sample = PROFILES.slice(0, 8);
+        profilesGrid.innerHTML = sample.map(p => renderProfileCard(p, { showCity: true })).join('');
+      }
+
+      // SEO Block
+      document.getElementById('state-seo-block').innerHTML = `
+        <h2>Premier Escort Services Across ${stateInfo.name}</h2>
+        <p>kiki.com provides comprehensive, high-discretion escort listings across every incorporated municipality and county in <strong>${stateInfo.name}</strong>. Whether you reside locally or are traveling to ${stateInfo.name} on business or vacation, our platform connects you with verified VIP companions who prioritize elegance, discretion, and mutual satisfaction.</p>
+        
+        <h3>How to Find Escorts in ${stateInfo.name}</h3>
+        <p>Simply select your desired city from the grid above. Each city page (${stateInfo.cities.slice(0, 3).map(c => `<a href="city.html?city=${c.slug}">${c.name}</a>`).join(', ')}, and more) contains independent advertiser profiles with real photos, live rates, video verification badges, and direct messaging or WhatsApp contact options.</p>
+
+        <h3>Browse Neighboring States & Regions</h3>
+        <div class="seo-city-links" style="margin-top: 16px;">
+          <a href="locations.html?region=India">All Indian States & UTs</a>
+          <a href="search.html">Advanced Search</a>
+        </div>
+      `;
+    });
+  </script>
+</body>
+</html>

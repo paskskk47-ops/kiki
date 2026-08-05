@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="city-title">Escorts — kiki.com</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .city-hero { background: linear-gradient(135deg,rgba(230,57,70,0.15),rgba(0,0,0,0) 60%), var(--bg-2); border-bottom: 1px solid var(--border); padding: calc(var(--header-h) + 40px) 24px 40px; }
+    .city-hero-inner { max-width: 1380px; margin: 0 auto; }
+    .city-hero h1 { font-size: clamp(1.8rem,4vw,3rem); font-weight: 900; margin-bottom: 8px; }
+    .city-hero p { color: var(--text-muted); font-size: 1rem; max-width: 600px; line-height: 1.6; margin-bottom: 20px; }
+    .city-cat-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+    .city-tab { padding: 7px 18px; border-radius: var(--radius-pill); border: 1px solid var(--border); font-size: 0.85rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: var(--transition); }
+    .city-tab:hover,.city-tab.active { background: var(--red); color: #fff; border-color: var(--red); }
+    .city-main { max-width: 1380px; margin: 0 auto; padding: 40px 24px 80px; }
+    .city-grid-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+    .city-listing-count { font-size: 0.875rem; color: var(--text-muted); }
+    .city-listing-count strong { color: var(--red); font-size: 1.1rem; }
+    .city-districts { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+    .city-district { padding: 5px 14px; border-radius: var(--radius-pill); background: var(--bg-2); border: 1px solid var(--border); font-size: 0.8rem; color: var(--text-muted); cursor: pointer; transition: var(--transition); }
+    .city-district:hover { border-color: var(--red); color: var(--red); }
+  </style>
+</head>
+<body>
+  <div id="header-mount"></div>
+
+  <div class="city-hero">
+    <div class="city-hero-inner">
+      <div id="breadcrumb-mount" class="mb-24"></div>
+      <h1 id="city-name-title">Escorts</h1>
+      <p id="city-intro"></p>
+      <div class="city-cat-tabs">
+        <button class="city-tab active" onclick="filterCat(null,this)">All</button>
+        <button class="city-tab" onclick="filterCat('female',this)">Escort Girls</button>
+        <button class="city-tab" onclick="filterCat('trans',this)">Escort Trans</button>
+        <button class="city-tab" onclick="filterCat('male',this)">Escort Boys</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="city-main">
+    <div class="city-grid-header">
+      <div class="city-listing-count" id="city-count"></div>
+      <a href="search.html" class="btn-secondary" style="width:auto;padding:8px 18px;font-size:0.85rem">Advanced Search →</a>
+    </div>
+    <div class="city-districts" id="city-districts"></div>
+    <div class="profiles-grid" id="city-grid"></div>
+
+    <div class="seo-block mt-24">
+      <div class="seo-block-inner" id="city-seo"></div>
+    </div>
+  </div>
+
+  <div id="footer-mount"></div>
+  <script src="data.js"></script>
+  <script src="locations.js"></script>
+  <script src="components.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('header-mount').innerHTML = renderHeader();
+      document.getElementById('footer-mount').innerHTML = renderFooter();
+      initHeader(); initAgeGate(); initCookieBanner();
+
+      const params = new URLSearchParams(window.location.search);
+      const citySlug = params.get('city') || 'mumbai';
+      
+      // Look up in global locations or fallback to Mumbai
+      let city = typeof getCityBySlug === 'function' ? getCityBySlug(citySlug) : null;
+      if (!city && typeof CITIES !== 'undefined') {
+        city = CITIES.find(c => c.slug === citySlug) || CITIES[0];
+      }
+      if (!city) {
+        city = { name: citySlug.charAt(0).toUpperCase() + citySlug.slice(1), slug: citySlug, state: 'India', region: 'India', flag: '🇮🇳', count: 42 };
+      }
+
+      let activeCat = null;
+
+      document.title = `Escorts ${city.name} — kiki.com`;
+      document.getElementById('city-name-title').textContent = `${city.flag || ''} Escort ${city.name}`;
+      document.getElementById('city-title').textContent = `Escort ${city.name} (${city.state || city.region}) — kiki.com`;
+      document.getElementById('city-intro').textContent = `Discover ${city.count} verified escort profiles and companions in ${city.name}, ${city.state || city.region}. Find the perfect companion for any occasion.`;
+
+      const stateSlug = city.stateSlug || (typeof slugify === 'function' && city.state ? slugify(city.state) : (city.state ? city.state.toLowerCase().replace(/[^a-z0-9]+/g, '-') : null));
+      const parentHref = stateSlug ? `state.html?state=${stateSlug}` : `locations.html?region=${city.region || 'India'}`;
+      document.getElementById('breadcrumb-mount').innerHTML = renderBreadcrumb([
+        { label: 'Home', href: 'index.html' },
+        { label: 'Locations', href: 'locations.html' },
+        { label: city.state || city.region || 'City', href: parentHref },
+        { label: city.name, href: '#' },
+      ]);
+
+      // Districts (mock / customized based on region)
+      const districtsInd = ['City Centre', 'Downtown', 'Old Town', 'Gated Community', 'Suburbs', 'West End', 'Metro Area'];
+      const districts = districtsInd;
+      document.getElementById('city-districts').innerHTML = districts.map(d => `<span class="city-district">${d}</span>`).join('');
+
+      function render() {
+        let profiles = typeof getProfilesByCity === 'function' ? getProfilesByCity(citySlug, 30) : [];
+        if (activeCat) profiles = profiles.filter(p => p.gender === activeCat);
+        if (!profiles.length && typeof PROFILES !== 'undefined') {
+          // Fallback to random sample of verified/online profiles so page is never completely bare, or prompt
+          profiles = PROFILES.filter(p => !activeCat || p.gender === activeCat).slice(0, 12);
+        }
+        document.getElementById('city-grid').innerHTML = profiles.map(p => renderProfileCard(p, {showCity:false})).join('');
+        document.getElementById('city-count').innerHTML = `<strong>${city.count}</strong> listings available around ${city.name}`;
+      }
+
+      window.filterCat = (cat, el) => {
+        activeCat = cat;
+        document.querySelectorAll('.city-tab').forEach(t => t.classList.remove('active'));
+        el.classList.add('active');
+        render();
+      };
+
+      // Find nearby or peer cities
+      let peerCities = [];
+      if (city.state && typeof getCitiesByState === 'function') {
+        peerCities = getCitiesByState(city.state).filter(c => c.slug !== citySlug).slice(0, 12);
+      }
+      if (!peerCities.length && typeof getCitiesByRegion === 'function') {
+        peerCities = getCitiesByRegion(city.region || 'India').filter(c => c.slug !== citySlug).slice(0, 12);
+      }
+      if (!peerCities.length && typeof CITIES !== 'undefined') {
+        peerCities = CITIES.filter(c => c.slug !== citySlug).slice(0, 12);
+      }
+
+      document.getElementById('city-seo').innerHTML = `
+        <h2>Escort Services in ${city.name}, ${city.state || city.region}</h2>
+        <p>kiki.com is a premier escort directory serving ${city.name} and surrounding areas across ${city.state || city.region}. With over ${city.count} active and independent listings, you can browse verified profiles, check live online status, and arrange private dates, social dinners, or getaways with ease.</p>
+        <h3>Why Choose kiki.com in ${city.name}?</h3>
+        <p>Our platform focuses on discretion, verification, and high-fidelity profile showcases including video introductions and real reviews from local clients around ${city.name}.</p>
+        <h3>Browse More Cities in ${city.state || city.region}</h3>
+        <div class="seo-city-links">
+          ${peerCities.map(c => `<a href="city.html?city=${c.slug}">${c.name}</a>`).join('')}
+          <a href="locations.html?region=${city.region || 'India'}" style="font-weight:700;color:var(--red)">View All ${city.state || city.region} →</a>
+        </div>
+      `;
+
+      render();
+    });
+  </script>
+</body>
+</html>

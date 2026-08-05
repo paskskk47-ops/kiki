@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Search — kiki.com</title>
+  <meta name="description" content="Search escorts by city, age, services, availability and more on kiki.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="search.css">
+</head>
+<body>
+  <div id="header-mount"></div>
+
+  <div class="search-page">
+    <!-- Filters Sidebar -->
+    <aside class="search-sidebar" id="search-sidebar">
+      <div class="filters-header">
+        <h2 class="filters-title">Filters</h2>
+        <button class="btn-clear-filters" id="btn-clear">Clear All</button>
+      </div>
+
+      <!-- Location -->
+      <div class="filter-group">
+        <div class="filter-group-title">Location</div>
+        <select class="form-select" id="f-city">
+          <option value="">All Cities</option>
+        </select>
+      </div>
+
+      <!-- Category -->
+      <div class="filter-group">
+        <div class="filter-group-title">Category</div>
+        <label class="filter-check"><input type="checkbox" value="female" class="f-cat"> Escort Girls</label>
+        <label class="filter-check"><input type="checkbox" value="trans" class="f-cat"> Escort Trans</label>
+        <label class="filter-check"><input type="checkbox" value="male" class="f-cat"> Escort Boys</label>
+        <label class="filter-check"><input type="checkbox" value="couple" class="f-cat"> Couples</label>
+      </div>
+
+      <!-- Membership Tier -->
+      <div class="filter-group">
+        <div class="filter-group-title">Membership Tier</div>
+        <label class="filter-check"><input type="checkbox" value="diamond" class="f-tier"> 💎 Diamond</label>
+        <label class="filter-check"><input type="checkbox" value="gold" class="f-tier"> 🥇 Gold</label>
+        <label class="filter-check"><input type="checkbox" value="silver" class="f-tier"> 🥈 Silver</label>
+      </div>
+
+      <!-- Age Range -->
+      <div class="filter-group">
+        <div class="filter-group-title">Age Range</div>
+        <div class="range-row">
+          <input type="number" class="form-input range-input" id="f-age-min" placeholder="Min" min="18" max="60" value="18">
+          <span>—</span>
+          <input type="number" class="form-input range-input" id="f-age-max" placeholder="Max" min="18" max="60" value="60">
+        </div>
+      </div>
+
+      <!-- Physical Attributes -->
+      <div class="filter-group">
+        <div class="filter-group-title">Ethnicity</div>
+        <select class="form-select" id="f-ethnicity">
+          <option value="">Any</option>
+          <option>European</option>
+          <option>Latin</option>
+          <option>Eastern European</option>
+          <option>Asian</option>
+          <option>Mediterranean</option>
+          <option>North African</option>
+          <option>Mixed</option>
+          <option>Middle Eastern</option>
+        </select>
+      </div>
+
+      <!-- Services -->
+      <div class="filter-group">
+        <div class="filter-group-title">Services</div>
+        <select class="form-select" id="f-service">
+          <option value="">Any service</option>
+        </select>
+      </div>
+
+      <!-- Quick Toggles -->
+      <div class="filter-group">
+        <div class="filter-group-title">Quick Filters</div>
+        <label class="filter-toggle">
+          <input type="checkbox" id="f-online">
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          <span>Online Now</span>
+        </label>
+        <label class="filter-toggle">
+          <input type="checkbox" id="f-verified">
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          <span>Verified Only</span>
+        </label>
+        <label class="filter-toggle">
+          <input type="checkbox" id="f-video">
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          <span>With Video</span>
+        </label>
+        <label class="filter-toggle">
+          <input type="checkbox" id="f-new">
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          <span>New Profiles</span>
+        </label>
+        <label class="filter-toggle">
+          <input type="checkbox" id="f-reviews">
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          <span>With Reviews</span>
+        </label>
+      </div>
+
+      <button class="btn-primary" id="btn-apply">Apply Filters</button>
+    </aside>
+
+    <!-- Results Area -->
+    <main class="search-results">
+      <div class="search-results-header">
+        <div class="results-meta">
+          <h1 class="results-title" id="results-title">All Profiles</h1>
+          <span class="results-count" id="results-count">— listings</span>
+        </div>
+        <div class="results-sort">
+          <label class="sort-label">Sort by:</label>
+          <select class="form-select sort-select" id="f-sort" style="width:auto;padding:8px 32px 8px 12px">
+            <option value="popular">Most Popular</option>
+            <option value="reviews">Most Reviewed</option>
+            <option value="rating">Highest Rated</option>
+            <option value="recent">Newest</option>
+            <option value="tier">Tier</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Mobile filter toggle -->
+      <button class="btn-mobile-filters" id="btn-mobile-filters">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+        Filters
+      </button>
+
+      <div class="profiles-grid" id="search-grid"></div>
+
+      <!-- Empty state -->
+      <div class="search-empty" id="search-empty" style="display:none">
+        <div style="font-size:3rem;margin-bottom:16px">🔍</div>
+        <h3>No profiles found</h3>
+        <p>Try adjusting your filters to see more results.</p>
+        <button class="btn-secondary" style="width:auto;margin-top:16px;padding:10px 24px" id="btn-reset-empty">Reset Filters</button>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination" id="pagination"></div>
+    </main>
+  </div>
+
+  <div id="footer-mount"></div>
+
+  <script src="data.js"></script>
+  <script src="components.js"></script>
+  <script src="search.js"></script>
+</body>
+</html>

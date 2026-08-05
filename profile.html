@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Profile — kiki.com</title>
+  <meta name="description" id="page-desc" content="View escort profile on kiki.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+  <div id="header-mount"></div>
+
+  <div class="page-wrap" id="profile-page" style="display:none">
+
+    <!-- Breadcrumb -->
+    <div id="breadcrumb-mount" class="mb-24"></div>
+
+    <!-- Report button row -->
+    <div class="profile-report-row">
+      <button class="btn-report" id="btn-report-trigger">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Report Profile
+      </button>
+    </div>
+
+    <!-- Two-column layout -->
+    <div class="profile-layout">
+
+      <!-- LEFT: Gallery -->
+      <div class="profile-left">
+        <div class="gallery-main-wrap" id="gallery-main-wrap">
+          <img id="gallery-main-img" src="" alt="" class="gallery-main-img">
+          <div class="gallery-badge-tl" id="gallery-tier-badge"></div>
+          <div class="gallery-badge-tr">
+            <span class="gallery-verified-badge" id="gallery-verified" style="display:none">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              Photo Verified
+            </span>
+          </div>
+          <div class="gallery-badge-bl" id="gallery-online" style="display:none">
+            <span class="online-dot-badge"><span class="online-pulse"></span> Online Now</span>
+          </div>
+          <div class="gallery-play-btn" id="gallery-play" style="display:none">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+        </div>
+
+        <div class="gallery-thumbs" id="gallery-thumbs"></div>
+
+        <!-- Video Player (hidden by default) -->
+        <div class="video-player-wrap" id="video-player" style="display:none">
+          <div class="video-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <p>Video preview available</p>
+            <button class="btn-secondary" style="width:auto;padding:8px 24px" onclick="document.getElementById('video-player').style.display='none'">Close</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Info -->
+      <div class="profile-right">
+
+        <!-- Name & Tier -->
+        <div class="profile-name-row">
+          <h1 class="profile-name" id="prof-name">—</h1>
+          <span class="profile-age-badge" id="prof-age">—</span>
+        </div>
+        <div id="prof-tier-badge" class="mb-24"></div>
+
+        <!-- Status Chips -->
+        <div class="profile-chips" id="prof-chips"></div>
+
+        <!-- Contact Block -->
+        <div class="contact-block" id="contact-block"></div>
+
+        <!-- Quick Info -->
+        <div class="profile-info-grid" id="prof-info-grid"></div>
+
+        <!-- Services -->
+        <div class="profile-section">
+          <h3 class="profile-section-title">Services</h3>
+          <div class="services-tags" id="prof-services"></div>
+        </div>
+
+        <!-- Languages -->
+        <div class="profile-section">
+          <h3 class="profile-section-title">Languages</h3>
+          <div class="services-tags" id="prof-languages"></div>
+        </div>
+
+        <!-- Description -->
+        <div class="profile-section">
+          <h3 class="profile-section-title">About Me</h3>
+          <p class="profile-description" id="prof-desc"></p>
+        </div>
+
+        <!-- Rates -->
+        <div class="profile-section">
+          <h3 class="profile-section-title">Rates</h3>
+          <div class="rates-grid" id="prof-rates"></div>
+        </div>
+
+        <!-- Availability -->
+        <div class="profile-section">
+          <h3 class="profile-section-title">Availability</h3>
+          <div class="availability-grid" id="prof-avail"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <div class="profile-reviews-section">
+      <div class="reviews-header">
+        <h2 class="reviews-title" id="reviews-title">Reviews</h2>
+        <button class="btn-write-review" id="btn-write-review">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+          Write a Review
+        </button>
+      </div>
+
+      <!-- Rating Summary -->
+      <div class="rating-summary" id="rating-summary" style="display:none"></div>
+
+      <!-- Review Cards -->
+      <div class="reviews-list" id="reviews-list"></div>
+
+      <!-- Write Review Form -->
+      <div class="write-review-form" id="write-review-form" style="display:none">
+        <h3 class="form-section-title">Leave a Review</h3>
+        <div class="star-picker" id="star-picker">
+          <span>Your rating:</span>
+          <div class="stars-input">
+            <button class="star-inp" data-val="1">★</button>
+            <button class="star-inp" data-val="2">★</button>
+            <button class="star-inp" data-val="3">★</button>
+            <button class="star-inp" data-val="4">★</button>
+            <button class="star-inp" data-val="5">★</button>
+          </div>
+        </div>
+        <div class="form-group mt-16">
+          <textarea class="form-textarea" placeholder="Share your experience…" id="review-textarea" rows="4"></textarea>
+        </div>
+        <button class="btn-primary" style="max-width:200px" onclick="submitReview()">
+          Submit Review
+        </button>
+      </div>
+    </div>
+
+    <!-- Similar Profiles -->
+    <div class="similar-section">
+      <div class="section-head">
+        <h2 class="section-heading">You Might Also Like</h2>
+      </div>
+      <div class="profiles-grid" id="similar-grid"></div>
+    </div>
+
+    <!-- SEO Block -->
+    <div class="seo-block mt-24">
+      <div class="seo-block-inner" id="seo-text"></div>
+    </div>
+
+  </div>
+
+  <!-- 404 state -->
+  <div id="profile-404" style="display:none; text-align:center; padding:120px 24px">
+    <div style="font-size:4rem;margin-bottom:16px">😢</div>
+    <h1 style="font-size:1.5rem;margin-bottom:8px">Profile not found</h1>
+    <p style="color:var(--text-muted);margin-bottom:24px">This profile may have been removed or the link is invalid.</p>
+    <a href="index.html" class="btn-primary" style="max-width:200px;margin:0 auto">← Back to Home</a>
+  </div>
+
+  <div id="footer-mount"></div>
+  <div id="report-modal-mount"></div>
+
+  <script src="data.js"></script>
+  <script src="components.js"></script>
+  <script src="profile.js"></script>
+</body>
+</html>

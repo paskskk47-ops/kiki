@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gandhinagar Call Girls — Premium Escort Directory | kiki.com</title>
+  <meta name="description" content="Find the best Gandhinagar Call Girls on kiki.com. Verified profiles, photos, and direct WhatsApp or call numbers. Discreet and reliable.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .city-hero { background: linear-gradient(135deg,rgba(230,57,70,0.15),rgba(0,0,0,0) 60%), var(--bg-2); border-bottom: 1px solid var(--border); padding: calc(var(--header-h) + 40px) 24px 40px; }
+    .city-hero-inner { max-width: 1380px; margin: 0 auto; }
+    .city-hero h1 { font-size: clamp(1.8rem,4vw,3rem); font-weight: 900; margin-bottom: 8px; }
+    .city-hero p { color: var(--text-muted); font-size: 1rem; max-width: 600px; line-height: 1.6; margin-bottom: 20px; }
+    .city-cat-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+    .city-tab { padding: 7px 18px; border-radius: var(--radius-pill); border: 1px solid var(--border); font-size: 0.85rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: var(--transition); }
+    .city-tab:hover,.city-tab.active { background: var(--red); color: #fff; border-color: var(--red); }
+    .city-main { max-width: 1380px; margin: 0 auto; padding: 40px 24px 80px; }
+    .city-grid-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+    .city-listing-count { font-size: 0.875rem; color: var(--text-muted); }
+    .city-listing-count strong { color: var(--red); font-size: 1.1rem; }
+    .city-districts { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+    .city-district { padding: 5px 14px; border-radius: var(--radius-pill); background: var(--bg-2); border: 1px solid var(--border); font-size: 0.8rem; color: var(--text-muted); cursor: pointer; transition: var(--transition); }
+    .city-district:hover { border-color: var(--red); color: var(--red); }
+  </style>
+</head>
+<body>
+  <div id="header-mount"></div>
+  <div class="city-hero">
+    <div class="city-hero-inner">
+      <div id="breadcrumb-mount" class="mb-24"></div>
+      <h1 id="city-name-title">Gandhinagar Call Girls</h1>
+      <p id="city-intro">Verified call girls and independent escorts in Gandhinagar, Gujarat. Find your perfect companion today.</p>
+      <div class="city-cat-tabs">
+        <button class="city-tab active" onclick="filterCat(null,this)">All</button>
+        <button class="city-tab" onclick="filterCat('female',this)">Escort Girls</button>
+        <button class="city-tab" onclick="filterCat('trans',this)">Escort Trans</button>
+        <button class="city-tab" onclick="filterCat('male',this)">Escort Boys</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="city-main">
+    <div class="city-grid-header">
+      <div class="city-listing-count" id="city-count"></div>
+      <a href="search.html" class="btn-secondary" style="width:auto;padding:8px 18px;font-size:0.85rem">Advanced Search →</a>
+    </div>
+    <div class="city-districts" id="city-districts"></div>
+    <div class="profiles-grid" id="city-grid"></div>
+
+    <div class="seo-block mt-24">
+      <div class="seo-block-inner" id="city-seo"></div>
+    </div>
+  </div>
+  <div id="footer-mount"></div>
+
+  <script src="data.js"></script>
+  <script src="locations.js"></script>
+  <script src="components.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('header-mount').innerHTML = renderHeader();
+      document.getElementById('footer-mount').innerHTML = renderFooter();
+      initHeader(); initAgeGate(); initCookieBanner();
+
+      const citySlug = 'gandhinagar';
+      let city = typeof getCityBySlug === 'function' ? getCityBySlug(citySlug) : null;
+      if (!city) {
+        city = { name: 'Gandhinagar', slug: citySlug, state: 'Gujarat', region: 'India', flag: '🇮🇳', count: 42 };
+      }
+
+      document.title = city.name + ' Call Girls — Verified Independent Escorts | kiki.com';
+      document.getElementById('city-name-title').textContent = (city.flag || '🇮🇳') + ' ' + city.name + ' Call Girls';
+      document.getElementById('city-intro').textContent = 'Discover verified ' + city.name + ' call girls, companion agencies, and VIP escorts. Call or WhatsApp directly to book.';
+
+      document.getElementById('breadcrumb-mount').innerHTML = renderBreadcrumb([
+        { label: 'Home', href: 'index.html' },
+        { label: 'Locations', href: 'locations.html' },
+        { label: city.state, href: slugify(city.state) + '.html' },
+        { label: city.name + ' Call Girls', href: '#' }
+      ]);
+
+      const districts = ['City Centre', 'Downtown', 'Old Town', 'Gated Community', 'Suburbs', 'West End', 'Metro Area'];
+      document.getElementById('city-districts').innerHTML = districts.map(d => '<span class="city-district">' + d + '</span>').join('');
+
+      let activeCat = null;
+      function render() {
+        let profiles = typeof getProfilesByCity === 'function' ? getProfilesByCity(citySlug, 30) : [];
+        if (activeCat) profiles = profiles.filter(p => p.gender === activeCat);
+        if (!profiles.length && typeof PROFILES !== 'undefined') {
+          profiles = PROFILES.filter(p => !activeCat || p.gender === activeCat).slice(0, 12);
+        }
+        document.getElementById('city-grid').innerHTML = profiles.map(p => renderProfileCard(p, {showCity:false})).join('');
+        document.getElementById('city-count').innerHTML = '<strong>' + city.count + '</strong> call girls available in ' + city.name;
+      }
+
+      window.filterCat = (cat, el) => {
+        activeCat = cat;
+        document.querySelectorAll('.city-tab').forEach(t => t.classList.remove('active'));
+        el.classList.add('active');
+        render();
+      };
+
+      // Peer links
+      let peerCities = [];
+      if (city.state && typeof getCitiesByState === 'function') {
+        peerCities = getCitiesByState(city.state).filter(c => c.slug !== citySlug).slice(0, 12);
+      }
+      document.getElementById('city-seo').innerHTML = '<h2>Independent Escorts and Call Girls in ' + city.name + '</h2>' +
+        '<p>Find premium adult companion services, high-class call girls, and independent agency profiles based in ' + city.name + ', ' + (city.state || 'India') + '. Discover verified escorts offering top-tier services, social dates, and private travel arrangements.</p>' +
+        '<h3>Browse More Locations in ' + city.state + '</h3>' +
+        '<div class="seo-city-links">' +
+          peerCities.map(c => '<a href="' + c.slug + '-call-girls.html">' + c.name + ' Call Girls</a>').join('') +
+          '<a href="' + slugify(city.state) + '.html" style="font-weight:700;color:var(--red)">View All ' + city.state + ' →</a>' +
+        '</div>';
+
+      render();
+    });
+    
+    function slugify(text) {
+      return text.toString().toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '');
+    }
+  </script>
+</body>
+</html>

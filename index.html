@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>kiki.com — Premium Escort Directory India | Mumbai, Delhi, Bengaluru</title>
+  <meta name="description" content="kiki.com — India's leading premium escort directory. Browse verified Diamond, Gold & Silver escorts in Mumbai, Delhi, Bengaluru, Pune and 20+ cities. Discreet, secure, sophisticated.">
+  <meta property="og:title" content="kiki.com — Premium Escort Directory India">
+  <meta property="og:description" content="India's most trusted escort directory. Verified profiles, real photos, discreet contact.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23e63946' d='M12 21.593c-5.63-5.539-11-10.297-11-14.402C1 3.604 4.068 2 6.219 2c1.666 0 3.077.837 4.185 2.093C11.404 2.837 12.815 2 14.481 2 17.072 2 19 4.104 19 7.191c0 4.105-5.37 8.863-11 14.402z'/></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header (rendered by JS) -->
+  <div id="header-mount"></div>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-badge">🔥 India's #1 Premium Directory</div>
+      <h1 class="hero-title">Find Your Perfect<br><span class="hero-gradient-text">Companion</span></h1>
+      <p class="hero-subtitle">Discover thousands of verified, elite escorts across India. Discreet, sophisticated, unforgettable.</p>
+
+      <div class="hero-search-box">
+        <div class="hero-search-row">
+          <div class="hero-field">
+            <label class="hero-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              City
+            </label>
+            <select class="hero-select" id="hero-city">
+              <option value="">All cities</option>
+            </select>
+          </div>
+          <div class="hero-field">
+            <label class="hero-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Category
+            </label>
+            <select class="hero-select" id="hero-cat">
+              <option value="">All categories</option>
+              <option value="female">Escort Girls</option>
+              <option value="trans">Escort Trans</option>
+              <option value="male">Escort Boys</option>
+              <option value="couple">Couples</option>
+              <option value="massage">Massage</option>
+            </select>
+          </div>
+          <div class="hero-field">
+            <label class="hero-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              Tier
+            </label>
+            <select class="hero-select" id="hero-tier">
+              <option value="">All tiers</option>
+              <option value="diamond">💎 Diamond</option>
+              <option value="gold">🥇 Gold</option>
+              <option value="silver">🥈 Silver</option>
+            </select>
+          </div>
+          <button class="hero-search-btn" id="hero-search-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            Search
+          </button>
+        </div>
+        <div class="hero-quick-filters">
+          <button class="hero-quick" onclick="window.location='search.html?filter=online'">
+            <span class="online-pulse"></span> Online Now
+          </button>
+          <button class="hero-quick" onclick="window.location='search.html?filter=verified'">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Verified Only
+          </button>
+          <button class="hero-quick" onclick="window.location='search.html?filter=video'">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            With Video
+          </button>
+          <button class="hero-quick" onclick="window.location='search.html?filter=new'">
+            ✦ New Profiles
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-num" id="stat-listings">2,000+</span>
+          <span class="hero-stat-lbl">Active Listings</span>
+        </div>
+        <div class="hero-stat-div"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num" id="stat-online">--</span>
+          <span class="hero-stat-lbl">Online Now</span>
+        </div>
+        <div class="hero-stat-div"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num" id="stat-cities">20</span>
+          <span class="hero-stat-lbl">Cities</span>
+        </div>
+        <div class="hero-stat-div"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num" id="stat-verified">--</span>
+          <span class="hero-stat-lbl">Verified Profiles</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="home-main">
+
+    <!-- Cities strip -->
+    <div class="cities-strip-wrap">
+      <div class="cities-strip" id="cities-strip">
+        <!-- populated by JS -->
+      </div>
+    </div>
+
+    <!-- Diamond Section -->
+    <div id="section-diamond"></div>
+
+    <!-- CTA Banner 1 -->
+    <div id="cta-1"></div>
+
+    <!-- Gold Section -->
+    <div id="section-gold"></div>
+
+    <!-- Silver Section -->
+    <div id="section-silver"></div>
+
+    <!-- CTA Banner 2 -->
+    <div id="cta-2"></div>
+
+    <!-- Online Now Section -->
+    <div id="section-online"></div>
+
+    <!-- New & Trending Section -->
+    <div id="section-new"></div>
+
+    <!-- With Video Section -->
+    <div id="section-video"></div>
+
+    <!-- CTA Banner 3 -->
+    <div id="cta-3"></div>
+
+    <!-- Most Reviewed Section -->
+    <div id="section-reviewed"></div>
+
+    <!-- Most Popular Section -->
+    <div id="section-popular"></div>
+
+    <!-- SEO Content Block -->
+    <section class="seo-block">
+      <div class="seo-block-inner">
+        <h2>kiki.com — India's Premier Escort Directory</h2>
+        <p>Welcome to kiki.com, the most comprehensive and trusted adult companion directory in India. Our platform connects discerning adults with verified, professional companions across Mumbai, Delhi, Bengaluru, Hyderabad, Chennai, and over 20 Indian cities.</p>
+
+        <h3>What types of escorts can I find?</h3>
+        <p>kiki.com features a diverse range of companions to suit every taste and preference. Browse our selection of <a href="index.html?cat=female">escort girls</a>, <a href="index.html?cat=trans">transgender escorts</a>, <a href="index.html?cat=male">male escorts</a>, and <a href="index.html?cat=couple">couples</a>. You'll also find specialists in <a href="index.html?cat=massage">massage and wellness</a>.</p>
+
+        <h3>How does the membership tier system work?</h3>
+        <p>Our unique tier system ensures you can identify top-quality companions at a glance. <strong>💎 Diamond</strong> escorts are our elite tier — the most experienced, most reviewed, and highest-rated companions with full photo and video verification. <strong>🥇 Gold</strong> escorts offer an excellent mid-range option with strong reviews and verified profiles. <strong>🥈 Silver</strong> escorts represent excellent value with authentic, genuine companions.</p>
+
+        <h3>How to find the perfect companion?</h3>
+        <p>Use our powerful <a href="search.html">advanced search</a> to filter by city, age, physical attributes, services, availability, and more. You can filter for <a href="search.html?filter=verified">verified profiles only</a>, profiles <a href="search.html?filter=video">with video</a>, or companions who are <a href="search.html?filter=online">online right now</a>.</p>
+
+        <h3>Why choose kiki.com?</h3>
+        <p>Unlike other directories, kiki.com takes safety and authenticity seriously. Every profile goes through our verification process. We offer photo verification, ID verification, phone verification, and video verification. Our moderation team works around the clock to remove fake or fraudulent profiles, ensuring you always see genuine companions.</p>
+
+        <h3>Popular cities in India</h3>
+        <div class="seo-city-links" id="seo-city-links">
+          <!-- populated by JS -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <div id="footer-mount"></div>
+
+  <!-- Report Modal -->
+  <div id="report-modal-mount"></div>
+
+  <script src="data.js"></script>
+  <script src="components.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

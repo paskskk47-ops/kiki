@@ -1,0 +1,280 @@
+/* ============================================================
+   KIKI.COM — Profile Detail Page
+   ============================================================ */
+
+.profile-report-row {
+  display: flex; justify-content: flex-end; margin-bottom: 20px;
+}
+.btn-report {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 16px; border-radius: var(--radius-pill);
+  background: transparent; border: 1px solid var(--border);
+  color: var(--text-muted); font-size: 0.82rem; font-weight: 600;
+  transition: var(--transition); cursor: pointer;
+}
+.btn-report:hover { border-color: var(--red); color: var(--red); }
+
+/* ---- Two-column layout ---- */
+.profile-layout {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 36px;
+  align-items: start;
+}
+
+/* ---- Gallery ---- */
+.gallery-main-wrap {
+  position: relative; border-radius: var(--radius-lg);
+  overflow: hidden; aspect-ratio: 3/4;
+  background: var(--bg-2); border: 1px solid var(--border);
+  cursor: pointer;
+}
+.gallery-main-img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.gallery-main-wrap:hover .gallery-main-img { transform: scale(1.03); }
+.gallery-badge-tl { position: absolute; top: 12px; left: 12px; z-index: 2; }
+.gallery-badge-tr { position: absolute; top: 12px; right: 12px; z-index: 2; }
+.gallery-badge-bl { position: absolute; bottom: 12px; left: 12px; z-index: 2; }
+.gallery-verified-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(0,0,0,0.7); backdrop-filter: blur(6px);
+  border-radius: var(--radius-pill); padding: 5px 10px;
+  font-size: 0.72rem; font-weight: 700; color: var(--diamond);
+}
+.gallery-play-btn {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  background: rgba(0,0,0,0.6); backdrop-filter: blur(6px);
+  width: 72px; height: 72px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 2; cursor: pointer; transition: var(--transition);
+}
+.gallery-play-btn:hover { background: var(--red); transform: translate(-50%,-50%) scale(1.08); }
+
+.gallery-thumbs {
+  display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap;
+}
+.gallery-thumb {
+  width: 80px; height: 80px; border-radius: var(--radius-sm);
+  overflow: hidden; cursor: pointer;
+  border: 2px solid transparent; transition: var(--transition); flex-shrink: 0;
+}
+.gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.gallery-thumb.active { border-color: var(--red); }
+.gallery-thumb:hover { border-color: var(--border-hov); transform: scale(1.05); }
+
+/* ---- Video player ---- */
+.video-player-wrap {
+  margin-top: 16px; border-radius: var(--radius-lg);
+  overflow: hidden; background: var(--bg-2); border: 1px solid var(--border);
+}
+.video-placeholder {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 16px; padding: 48px; text-align: center; color: var(--text-muted);
+}
+
+/* ---- Profile right column ---- */
+.profile-right {
+  position: sticky; top: calc(var(--header-h) + 20px);
+}
+
+.profile-name-row {
+  display: flex; align-items: baseline; gap: 10px;
+  margin-bottom: 8px;
+}
+.profile-name { font-size: 2rem; font-weight: 800; }
+.profile-age-badge {
+  font-size: 1.1rem; color: var(--text-muted); font-weight: 400;
+}
+
+.profile-tier-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 14px; border-radius: var(--radius-pill);
+  font-size: 0.85rem; font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.profile-chips {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-bottom: 24px;
+}
+.profile-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: var(--radius-pill);
+  font-size: 0.8rem; font-weight: 600; border: 1px solid;
+}
+.chip-online   { background: rgba(74,222,128,0.1); color: #4ade80; border-color: rgba(74,222,128,0.3); }
+.chip-verified { background: rgba(125,211,252,0.1); color: var(--diamond); border-color: rgba(125,211,252,0.3); }
+.chip-new      { background: rgba(230,57,70,0.1); color: var(--red); border-color: rgba(230,57,70,0.3); }
+.chip-video    { background: rgba(167,139,250,0.1); color: #a78bfa; border-color: rgba(167,139,250,0.3); }
+
+/* ---- Contact Block ---- */
+.contact-block {
+  background: var(--bg-2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px; margin-bottom: 24px;
+}
+.contact-block-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-dim); margin-bottom: 14px; }
+.contact-method { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.contact-method:last-child { margin-bottom: 0; }
+.contact-method-label { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; color: var(--text-muted); }
+.contact-reveal-btn {
+  padding: 7px 16px; border-radius: var(--radius-pill);
+  background: var(--red); color: #fff; font-size: 0.8rem; font-weight: 700;
+  cursor: pointer; transition: var(--transition); border: none;
+}
+.contact-reveal-btn:hover { background: var(--red-dark); }
+.contact-reveal-btn.revealed {
+  background: var(--bg-3); color: var(--text);
+  border: 1px solid var(--border); font-family: monospace;
+  font-size: 0.85rem; letter-spacing: 1px;
+}
+.btn-message {
+  width: 100%; margin-top: 14px; padding: 11px;
+  border-radius: var(--radius-pill);
+  background: transparent; border: 1px solid var(--red);
+  color: var(--red); font-size: 0.9rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  cursor: pointer; transition: var(--transition);
+}
+.btn-message:hover { background: var(--red); color: #fff; }
+
+/* ---- Profile Info Grid ---- */
+.profile-info-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 12px; margin-bottom: 24px;
+}
+.info-cell {
+  background: var(--bg-2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 12px 14px;
+}
+.info-cell-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-dim); margin-bottom: 4px; }
+.info-cell-value { font-size: 0.9rem; font-weight: 500; }
+
+/* ---- Profile Sections ---- */
+.profile-section { margin-bottom: 24px; }
+.profile-section-title {
+  font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.6px; color: var(--text-dim); margin-bottom: 10px;
+}
+.services-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.service-tag {
+  padding: 5px 12px; border-radius: var(--radius-pill);
+  background: var(--bg-3); border: 1px solid var(--border);
+  font-size: 0.8rem; color: var(--text-muted);
+}
+.profile-description { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+
+/* ---- Rates ---- */
+.rates-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.rate-card {
+  background: var(--bg-2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px;
+}
+.rate-card-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-dim); margin-bottom: 8px; }
+.rate-price { font-size: 1.3rem; font-weight: 800; color: var(--red); }
+.rate-duration { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+
+/* ---- Availability ---- */
+.availability-grid { display: flex; flex-direction: column; gap: 6px; }
+.avail-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 12px; background: var(--bg-2); border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+.avail-day { font-size: 0.85rem; font-weight: 500; }
+.avail-time {
+  font-size: 0.8rem; font-weight: 700; padding: 3px 10px;
+  border-radius: var(--radius-pill);
+}
+.avail-time.available { background: rgba(74,222,128,0.1); color: #4ade80; }
+.avail-time.off { background: var(--bg-3); color: var(--text-dim); }
+
+/* ============================================================
+   REVIEWS SECTION
+   ============================================================ */
+.profile-reviews-section {
+  margin-top: 48px; padding-top: 48px;
+  border-top: 1px solid var(--border);
+}
+.reviews-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 24px;
+}
+.reviews-title { font-size: 1.4rem; font-weight: 800; }
+.btn-write-review {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 16px; border-radius: var(--radius-pill);
+  background: var(--bg-3); border: 1px solid var(--border);
+  color: var(--text-muted); font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: var(--transition);
+}
+.btn-write-review:hover { border-color: var(--red); color: var(--red); }
+
+.rating-summary {
+  display: flex; align-items: center; gap: 24px;
+  background: var(--bg-2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px; margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.rating-big { font-size: 3.5rem; font-weight: 900; color: var(--gold); line-height: 1; }
+.rating-stars-big { font-size: 1.4rem; color: var(--gold); margin-bottom: 4px; }
+.rating-count { font-size: 0.85rem; color: var(--text-muted); }
+
+.reviews-list { display: flex; flex-direction: column; gap: 16px; }
+.review-card {
+  background: var(--bg-2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px;
+  transition: var(--transition);
+}
+.review-card:hover { border-color: var(--border-hov); }
+.review-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.review-author { display: flex; align-items: center; gap: 10px; }
+.review-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--bg-3); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; font-weight: 700; color: var(--text-muted);
+}
+.review-name { font-size: 0.9rem; font-weight: 600; }
+.review-date { font-size: 0.75rem; color: var(--text-dim); }
+.review-rating { font-size: 0.9rem; color: var(--gold); }
+.review-comment { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
+
+.write-review-form {
+  margin-top: 32px; padding: 24px;
+  background: var(--bg-2); border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.form-section-title { font-size: 1rem; font-weight: 700; margin-bottom: 16px; }
+.star-picker { display: flex; align-items: center; gap: 12px; }
+.stars-input { display: flex; gap: 4px; }
+.star-inp {
+  font-size: 1.5rem; color: var(--text-dim); cursor: pointer;
+  transition: var(--transition); background: none; border: none;
+}
+.star-inp.active { color: var(--gold); }
+.star-inp:hover { color: var(--gold); transform: scale(1.2); }
+
+/* ============================================================
+   SIMILAR PROFILES
+   ============================================================ */
+.similar-section {
+  margin-top: 56px; padding-top: 40px;
+  border-top: 1px solid var(--border);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1100px) {
+  .profile-layout { grid-template-columns: 1fr 360px; gap: 24px; }
+}
+@media (max-width: 800px) {
+  .profile-layout { grid-template-columns: 1fr; }
+  .profile-right { position: static; }
+  .gallery-main-wrap { max-height: 440px; }
+  .rates-grid { grid-template-columns: 1fr; }
+  .profile-info-grid { grid-template-columns: 1fr; }
+}
